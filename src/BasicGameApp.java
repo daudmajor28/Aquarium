@@ -60,16 +60,30 @@ public class BasicGameApp implements Runnable {
 	public BasicGameApp() {
       
       setUpGraphics();
+
+      //randomness
+        //range 0-9
+        int randx=(int)(Math.random() * 10);
+        // range 1-10
+        randx = (int)(Math.random() * 10) + 1;
+
+        //range 1-1000
+        randx = (int)(Math.random() * 1000) + 1;
+
+        //range 1-700
+        int randy = (int)(Math.random() * 700) + 1;
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
 		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
-		astro = new Astronaut(10,10);
-
-
-        astro2 = new Astronaut(10,17);
-
+		astro = new Astronaut(20,300);
+        astro.dy=2;
+        astro.height=30;
+        astro.width=40;
+        astro2 = new Astronaut(randy,randx);
         astro2.dy=-2;
+        astro2.height=50;
+        astro2.width=50;
 
 	}// BasicGameApp()
 
@@ -88,7 +102,7 @@ public class BasicGameApp implements Runnable {
 
          moveThings();  //move all the game objects
          render();  // paint the graphics
-         pause(20); // sleep for 10 ms
+         pause(10); // sleep for 10 ms
 		}
 	}
 
