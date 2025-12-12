@@ -45,7 +45,8 @@ public class BasicGameApp implements Runnable {
    //These are things that are made up of more than one variable type
 	private Astronaut astro;
     public Astronaut astro2;
-    public Astroid astroid1;
+    public Astroid  astroid2;
+    public Astroid  astroid1;
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -89,6 +90,7 @@ public class BasicGameApp implements Runnable {
         astro2.width=50;
 
         astroid1 = new Astroid(100,randx);
+        astroid2 = new Astroid(randy,467);
 	}// BasicGameApp()
 
    
@@ -117,8 +119,16 @@ public class BasicGameApp implements Runnable {
 		astro.move();
         astro2.move();
         astroid1.move();
+        astroid2.move();
+crashing();
 
-	}
+    }
+    public void crashing(){
+        if(astro.hitbox.intersects(astro2.hitbox));
+        System.out.println("CRASH!!");
+
+
+    }
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
    public void pause(int time ){
@@ -168,10 +178,12 @@ public class BasicGameApp implements Runnable {
 
       //draw the image of the astronaut
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
-
-		g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
+        if(astro2.isAlive == true){
+		g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);}
         g.drawImage(AstroidPic, astroid1.xpos, astroid1.ypos,astroid1.width,astroid1.height, null);
+        g.drawImage(AstroidPic, astroid2.xpos, astroid2.ypos,astroid2.width,astroid2.height, null);
 
+g.drawRect(astro.hitbox.x, astro.hitbox.y, astro.hitbox.width, astro.hitbox.height);
 
 
         bufferStrategy.show();
