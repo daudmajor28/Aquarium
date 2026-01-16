@@ -12,6 +12,8 @@
 //import java.awt.Canvas;
 
 //Graphics Libraries
+import jdk.nashorn.api.scripting.AbstractJSObject;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
@@ -44,8 +46,8 @@ public class BasicGameApp implements Runnable {
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
-	public Astronaut astro;
-    public Astronaut astro2;
+	public Astronaut ball;
+    public Astronaut player;
     public Astroid  astroid2;
     public Astroid  astroid1;
 
@@ -83,19 +85,19 @@ public class BasicGameApp implements Runnable {
         Futbol = Toolkit.getDefaultToolkit().getImage("Subject.png"); //load the picture
         backgroundPic = Toolkit.getDefaultToolkit().getImage("pitch.jpg"); //load the picture
 
-        astro = new Astronaut(randy,randx);
-        astro.dy=-2;
-        astro.height=1;
-        astro.width=1;
+       ball = new Astronaut(randy,randx);
+        ball.dy=-2;
+        ball.height=1;
+        ball.width=1;
 
-        astro2 = new Astronaut(randy,randx);
-        astro2.dy=-2;
-        astro2.height=150;
-        astro2.width=150;
+        player = new Astronaut(randy,randx);
+        player.dy=-2;
+        player.height=150;
+        player.width=150;
 
         astroid1 = new Astroid(100,800);
         astroid1.dx= -astroid1.dx;
-        astroid2 = new Astroid(randy,467);
+        //astroid2 = new Astroid(randy,467);
 	}// BasicGameApp()
 
    
@@ -121,18 +123,18 @@ public class BasicGameApp implements Runnable {
 	public void moveThings()
 	{
       //calls the move( ) code in the objects
-		astro.move();
-        astro2.move();
+		ball.move();
+        player.move();
         astroid1.move();
-        astroid2.move();
+
 crashing();
 
     }
     public void crashing() {
-        if (astro.hitbox.intersects(astro2.hitbox)) {
-            System.out.println("CRASH!!");
-            astro.dx = -astro.dx;
-            astro.dy = -astro.dy;
+        if (ball.hitbox.intersects(player.hitbox)) {
+            System.out.println("TOUCHDOWN!");
+            ball.dx = -ball.dx;
+            ball.dy = -ball.dy;
 
 
         }
@@ -197,13 +199,13 @@ crashing();
         g.drawImage(backgroundPic, 0, 0, WIDTH, HEIGHT, null);
       //draw the image of the astronaut
 
-		g.drawImage(Bob, astro.xpos, astro.ypos, astro.width, astro.height, null);
-        if(astro2.isAlive == true){
-		g.drawImage(Bob, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);}
+		g.drawImage(Futbol,ball.xpos, ball.ypos, ball.width, ball.height, null);
+        if(player.isAlive == true){
+		g.drawImage(Futbol, player.xpos, player.ypos, player.width, player.height, null);}
         g.drawImage(Futbol, astroid1.xpos, astroid1.ypos,astroid1.width,astroid1.height, null);
         g.drawImage(Futbol, astroid2.xpos, astroid2.ypos,astroid2.width,astroid2.height, null);
 
-g.drawRect(astro.hitbox.x, astro.hitbox.y, astro.hitbox.width, astro.hitbox.height);
+g.drawRect(ball.hitbox.x, ball.hitbox.y, ball.hitbox.width, ball.hitbox.height);
 
 
         bufferStrategy.show();
