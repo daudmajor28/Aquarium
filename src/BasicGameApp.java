@@ -40,7 +40,7 @@ public class BasicGameApp implements Runnable {
    public JPanel panel;
    
 	public BufferStrategy bufferStrategy;
-	public Image Bob;
+	public Image playerpic;
     public Image Futbol;
     public Image backgroundPic;
 
@@ -74,27 +74,27 @@ public class BasicGameApp implements Runnable {
         randx = (int)(Math.random() * 10) + 1;
 
         //range 1-1000
-        randx = (int)(Math.random() * 1000) + 1;
+        randx = (int)(Math.random() * 150) + 1;
 
         //range 1-700
-        int randy = (int)(Math.random() * 700) + 1;
+        int randy = (int)(Math.random() * 250) + 1;
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
-		Bob = Toolkit.getDefaultToolkit().getImage("Runner.png"); //load the picture
+		 playerpic= Toolkit.getDefaultToolkit().getImage("Runner.png"); //load the picture
         Futbol = Toolkit.getDefaultToolkit().getImage("Subject.png"); //load the picture
         backgroundPic = Toolkit.getDefaultToolkit().getImage("pitch.jpg"); //load the picture
 
        ball = new Astronaut(randy,randx);
         ball.dy=-2;
-        ball.height=1;
-        ball.width=1;
+        ball.height=30;
+        ball.width=30;
 
-        player = new Astronaut(randy,randx);
+        player = new Astronaut(102,50);
         player.dy=-2;
         player.height=150;
         player.width=150;
-
+astroid2= new Astroid(100,30);
         astroid1 = new Astroid(100,800);
         astroid1.dx= -astroid1.dx;
         //astroid2 = new Astroid(randy,467);
@@ -122,6 +122,7 @@ public class BasicGameApp implements Runnable {
 
 	public void moveThings()
 	{
+        System.out.println(ball.ypos);
       //calls the move( ) code in the objects
 		ball.move();
         player.move();
@@ -201,11 +202,12 @@ crashing();
 
 		g.drawImage(Futbol,ball.xpos, ball.ypos, ball.width, ball.height, null);
         if(player.isAlive == true){
-		g.drawImage(Futbol, player.xpos, player.ypos, player.width, player.height, null);}
-        g.drawImage(Futbol, astroid1.xpos, astroid1.ypos,astroid1.width,astroid1.height, null);
-        g.drawImage(Futbol, astroid2.xpos, astroid2.ypos,astroid2.width,astroid2.height, null);
+		g.drawImage(playerpic, player.xpos, player.ypos, player.width, player.height, null);
+        }
+       // g.drawImage(Futbol, astroid1.xpos, astroid1.ypos,astroid1.width,astroid1.height, null);
+        //g.drawImage(Futbol, astroid2.xpos, astroid2.ypos,astroid2.width,astroid2.height, null);
 
-g.drawRect(ball.hitbox.x, ball.hitbox.y, ball.hitbox.width, ball.hitbox.height);
+        g.drawRect(ball.hitbox.x, ball.hitbox.y, ball.hitbox.width, ball.hitbox.height);
 
 
         bufferStrategy.show();
