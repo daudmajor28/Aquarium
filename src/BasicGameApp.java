@@ -150,8 +150,8 @@ public class BasicGameApp implements Runnable {
         }
         if (player.hitbox.intersects(player2.hitbox)) {
             System.out.println("TACKLE");
-            player.dx = -Ball.dx;
-            player.dy = -Ball.dy;
+            player2.height = player2.height - 1;
+            player2.width = player2.width - 1;
             player.isCrashing= true;
       //if (player.hitbox.intersects(player2.hitbox)) {
 
