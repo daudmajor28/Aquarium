@@ -42,14 +42,14 @@ public class BasicGameApp implements Runnable {
     public Image playerpic;
     public Image FutbolPic;
     public Image backgroundPic;
-
+    public Image Playerpic2;
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
    // public Player ball;
     public Player player;
     public Ball Ball;
-    //public BallPic BallPic
-            ;
+    public Player player2;
+
 
     // Main method definition
     // This is the code that runs first and automatically
@@ -84,7 +84,7 @@ public class BasicGameApp implements Runnable {
         playerpic = Toolkit.getDefaultToolkit().getImage("Runner.png"); //load the picture
         FutbolPic = Toolkit.getDefaultToolkit().getImage("Subject.png"); //load the picture
         backgroundPic = Toolkit.getDefaultToolkit().getImage("pitch.jpg"); //load the picture
-
+        Playerpic2 = Toolkit.getDefaultToolkit().getImage("player2.png");
      //   player = new Player(randy, randx);
         //Ball.dy = -2;
        //Ball.height = 30;
@@ -94,11 +94,21 @@ public class BasicGameApp implements Runnable {
         player.dy = -2;
         player.height = 150;
         player.width = 150;
-       // Ball = new Ball(100, 30);
+       // Ball = new Ball2(100, 30);
         Ball = new Ball(100, 400);
-        Ball.dx = -Ball.dx;
+        //Ball.dx = -Ball.dx;
+        Ball.dy = -2;
+        Ball.height = 50;
+        Ball.width = 50;
+
+        player2 = new Player(600, 70);
+        player2.dy = -2;
+        player2.height = 150;
+        player2.width = 150;
+
         //astroid2 = new Astroid(randy,467);
-    }// BasicGameApp()
+    }
+    //BasicGameApp();
 
 
 //*******************************************************************************
@@ -125,32 +135,34 @@ public class BasicGameApp implements Runnable {
         //calls the move( ) code in the objects
         Ball.move();
         player.move();
-        //Ball.move();
-
+        player2.move();
         crashing();
 
     }
 
     public void crashing() {
-        if (Ball.hitbox.intersects(player.hitbox)&& Ball.isCrashing== false) {
+        if (Ball.hitbox.intersects(player.hitbox)) {
             System.out.println("TOUCHDOWN!");
             Ball.dx = -Ball.dx;
             Ball.dy = -Ball.dy;
             Ball.isCrashing= true;
 
         }
-//        if (astroid1.hitbox.intersects(astroid2.hitbox)) {
-//
-//            System.out.println(" astroid collison");
-//            astroid2.height = astroid2.height + 100;
-//            astroid2.isCrashing = true;
+        if (player.hitbox.intersects(player2.hitbox)) {
+            System.out.println("TACKLE");
+            player.dx = -Ball.dx;
+            player.dy = -Ball.dy;
+            player.isCrashing= true;
+      //if (player.hitbox.intersects(player2.hitbox)) {
 
-//        }
+      //      System.out.println(" TOUCHDOWN");
+     //      player2.height = player2.height + 100;
+     //      //player2.isCrashing = true;
+
+       }
         if (!Ball.hitbox.intersects(player.hitbox)) {
             Ball.isCrashing = false;
-        }
-
-    }
+        }}
 
     //Pauses or sleeps the computer for the amount specified in milliseconds
     public void pause(int time) {
@@ -204,7 +216,8 @@ public class BasicGameApp implements Runnable {
         if (player.isAlive == true) {
             g.drawImage(playerpic, player.xpos, player.ypos, player.width, player.height, null);
         }
-         //g.drawImage(playerpic, player.xpos, player.ypos,player.width,player.height, null);
+        if (player2.isAlive == true)
+         g.drawImage(Playerpic2, player2.xpos, player2.ypos,player2.width,player2.height, null);
         //g.drawImage(Futbol, astroid2.xpos, astroid2.ypos,astroid2.width,astroid2.height, null);
 
         //g.drawRect(ball.hitbox.x, ball.hitbox.y, ball.hitbox.width, ball.hitbox.height);
